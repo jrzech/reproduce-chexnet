@@ -1,0 +1,15 @@
+label,retrained auc,chexnet auc
+Atelectasis,0.8161,0.8094
+Cardiomegaly,0.9105,0.9248
+Consolidation,0.8008,0.7901
+Edema,0.8979,0.8878
+Effusion,0.8839,0.8638
+Emphysema,0.9227,0.9371
+Fibrosis,0.8293,0.8047
+Hernia,0.901,0.9164
+Infiltration,0.7077,0.7345
+Mass,0.8308,0.8676
+Nodule,0.7748,0.7802
+Pleural_Thickening,0.786,0.8062
+Pneumonia,0.7651,0.768
+Pneumothorax,0.8739,0.8887

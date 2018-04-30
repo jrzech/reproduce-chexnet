@@ -1,0 +1,12 @@
+name: reproduce-chexnet
+channels:
+  - conda-forge
+dependencies:
+  - python = 3.6.5
+  - numpy = 1.14.2
+  - matplotlib = 2.2.2
+  - pillow = 5.1.0
+  - pandas = 0.22.0
+  - scikit-image = 0.13.1
+  - scikit-learn = 0.19.1
+  - jupyterlab
