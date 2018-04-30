@@ -9,3 +9,4 @@ PATH_TO_IMAGES = "/enter_your_path_to_downloaded_uncompressed_nih_images_here/"
 WEIGHT_DECAY = 1e-4
 LEARNING_RATE = 0.01
 preds, aucs = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY)
+
