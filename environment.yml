@@ -9,4 +9,6 @@ dependencies:
   - pandas = 0.22.0
   - scikit-image = 0.13.1
   - scikit-learn = 0.19.1
+  - seaborn = 0.8.1
   - jupyterlab
+  - ipykernel = 4.8.2
