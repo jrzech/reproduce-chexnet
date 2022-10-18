@@ -193,7 +193,7 @@ def load_data(
         'Hernia']
 
     data_transform = transforms.Compose([
-        transforms.Scale(224),
+        transforms.Resize(224),
         transforms.CenterCrop(224),
         transforms.ToTensor(),
         transforms.Normalize(mean, std)

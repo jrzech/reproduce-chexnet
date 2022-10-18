@@ -125,7 +125,7 @@ def train_model(
                     loss.backward()
                     optimizer.step()
 
-                running_loss += loss.data[0] * batch_size
+                running_loss += loss.data * batch_size
 
             epoch_loss = running_loss / dataset_sizes[phase]
 
@@ -221,15 +221,15 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
     data_transforms = {
         'train': transforms.Compose([
             transforms.RandomHorizontalFlip(),
-            transforms.Scale(224),
-            # because scale doesn't always give 224 x 224, this ensures 224 x
+            transforms.Resize(224),
+            # because resize doesn't always give 224 x 224, this ensures 224 x
             # 224
             transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize(mean, std)
         ]),
         'val': transforms.Compose([
-            transforms.Scale(224),
+            transforms.Resize(224),
             transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize(mean, std)
@@ -262,7 +262,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
     # please do not attempt to train without GPU as will take excessively long
     if not use_gpu:
         raise ValueError("Error, requires GPU")
-    model = models.densenet121(pretrained=True)
+    model = models.densenet121(weights='DEFAULT')
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
     # activation

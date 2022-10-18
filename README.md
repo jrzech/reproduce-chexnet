@@ -9,17 +9,24 @@ Provides Python code to reproduce model training, predictions, and heatmaps from
 ## Getting Started:
 Click on the `launch binder` button at the top of this `README` to launch a remote instance in your browser using [binder](https://mybinder.org/). This requires no local configuration and lets you get started immediately. Open `Explore_Predictions.ipynb`, run all cells, and follow the instructions provided to review a selection of included [chest x-rays from NIH](https://arxiv.org/pdf/1705.02315.pdf).
 
-To configure your own local instance (assumes [Anaconda is installed](https://www.anaconda.com/download/); can be run on Amazon EC2 p2.xlarge instance if you do not have a GPU):
+To configure your own local instance (assumes [Anaconda is installed](https://www.anaconda.com/download/); can be run on paperspace GPU instance if you do not have a GPU):
 
 ```git clone https://www.github.com/jrzech/reproduce-chexnet.git
 cd reproduce-chexnet
 conda env create -f environment.yml
-source postBuild
 source activate reproduce-chexnet
+python -m ipykernel install --user --name reproduce-chexnet --display-name "Python (reproduce-chexnet)"
 ```
+## Updates (2022)
+
+Changes in libraries available through conda channels and non-compability of older versions of pytorch / torchvision on newer CUDA drivers caused the original build to break.  
+
+This library was updated in late 2022 so anyone interested could continue to use it. (1) environment.yml was updated and slight edits to code were made to ensure compatibility with newer version of pytorch/torchvision (2) NIH CXR labels were updated to latest version. Given changes in torchvision model naming conventions, the previously trained model was no longer usable and a new model was retrained; reported AUC numbers are based on this retrained models. 
+
+Given [expected variability in predictions of retrained deep learning models](https://arxiv.org/pdf/1912.03606.pdf), predictions vary from the model originally posted in 2018. The original model and predictions are shared in a /results-2018 folder, but will require you to create a compatible environment with the older pytorch 0.4.0 and torchvision 0.2.0 to use them interactively.   
 
 ## Replicated results:
-This reproduction achieved average test set AUC 0.836 across 14 findings compared to 0.841 reported in original paper:
+This reproduction achieved diagnosis-level AUC as given below compared to original paper:
 
 <div>
 <table border="0" class="dataframe">
@@ -38,72 +45,72 @@ This reproduction achieved average test set AUC 0.836 across 14 findings compare
   <tbody>
     <tr>
       <th>Atelectasis</th>
-      <td>0.8161</td>
+      <td>0.8180</td>
       <td>0.8094</td>
     </tr>
     <tr>
       <th>Cardiomegaly</th>
-      <td>0.9105</td>
+      <td>0.9090</td>
       <td>0.9248</td>
     </tr>
     <tr>
       <th>Consolidation</th>
-      <td>0.8008</td>
+      <td>0.8002</td>
       <td>0.7901</td>
     </tr>
     <tr>
       <th>Edema</th>
-      <td>0.8979</td>
+      <td>0.8945</td>
       <td>0.8878</td>
     </tr>
     <tr>
       <th>Effusion</th>
-      <td>0.8839</td>
+      <td>0.8827</td>
       <td>0.8638</td>
     </tr>
     <tr>
       <th>Emphysema</th>
-      <td>0.9227</td>
+      <td>0.9316</td>
       <td>0.9371</td>
     </tr>
     <tr>
       <th>Fibrosis</th>
-      <td>0.8293</td>
+      <td>0.8251</td>
       <td>0.8047</td>
     </tr>
     <tr>
       <th>Hernia</th>
-      <td>0.9010</td>
+      <td>0.9175</td>
       <td>0.9164</td>
     </tr>
     <tr>
       <th>Infiltration</th>
-      <td>0.7077</td>
+      <td>0.7156</td>
       <td>0.7345</td>
     </tr>
     <tr>
       <th>Mass</th>
-      <td>0.8308</td>
+      <td>0.8377</td>
       <td>0.8676</td>
     </tr>
     <tr>
       <th>Nodule</th>
-      <td>0.7748</td>
+      <td>0.7756</td>
       <td>0.7802</td>
     </tr>
     <tr>
       <th>Pleural_Thickening</th>
-      <td>0.7860</td>
+      <td>0.7889</td>
       <td>0.8062</td>
     </tr>
     <tr>
       <th>Pneumonia</th>
-      <td>0.7651</td>
+      <td>0.7617</td>
       <td>0.7680</td>
     </tr>
     <tr>
       <th>Pneumothorax</th>
-      <td>0.8739</td>
+      <td>0.8776</td>
       <td>0.8887</td>
     </tr>
   </tbody>
@@ -123,7 +130,7 @@ extract all `tar.gz` files to a single folder, and provide path as needed in cod
 ## Train your own model!
 Please note: a GPU is required to train the model. You will encounter errors if you do not have a GPU available and CUDA installed and you attempt to retrain. With a GPU, you can retrain the model with `retrain.py`. Make sure you download the full NIH dataset before trying this. If you run out of GPU memory, reduce `BATCH_SIZE` from its default setting of 16.
 
-If you do not have a GPU, but wish to retrain the model yourself to verify performance, you can replicate the model using Amazon EC2's p2.xlarge instance ($0.90/hr at time of writing) with an AMI that has CUDA installed (e.g. Deep Learning AMI (Ubuntu) Version 8.0 - ami-dff741a0). After [creating and ssh-ing into the EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html), follow the instructions in Getting Started above to configure your environment. If you have no experience with Amazon EC2, [fast.ai's tutorial is a good place to start](http://course.fast.ai/lessons/aws.html)
+If you do not have a GPU, but wish to retrain the model yourself to verify performance, you can replicate the model with paperspace, Amazon EC2, Google Colaboratory, or other online cloud GPU services. If you're starting from scratch, [paperspace](http://www.paperspace.com) is easy to get started with. 
 
 ## Note on training
 I use SGD+momentum rather than the Adam optimizer as described in the original [paper](https://arxiv.org/pdf/1711.05225.pdf). I achieved better results with SGD+momentum, as has been reported in [other work](https://arxiv.org/pdf/1705.08292.pdf).
