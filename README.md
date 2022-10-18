@@ -7,7 +7,7 @@ Provides Python code to reproduce model training, predictions, and heatmaps from
 
 
 ## Getting Started:
-Click on the `launch binder` button at the top of this `README` to launch a remote instance in your browser using [binder](https://mybinder.org/). This requires no local configuration, but I caution that it can take a few minutes to launch. Open `Explore_Predictions.ipynb`, run all cells, and follow the instructions provided to review a selection of included [chest x-rays from NIH](https://arxiv.org/pdf/1705.02315.pdf).
+Click on the `launch binder` button at the top of this `README` to launch a remote instance in your browser using [binder](https://mybinder.org/). This requires no local configuration, but it can take a couple minutes to launch. Open `Explore_Predictions.ipynb`, run all cells, and follow the instructions provided to review a selection of included [chest x-rays from NIH](https://arxiv.org/pdf/1705.02315.pdf).
 
 To configure your own local instance (assumes [Anaconda is installed](https://www.anaconda.com/download/); can be run on paperspace GPU instance if you do not have a GPU):
 
@@ -19,11 +19,11 @@ python -m ipykernel install --user --name reproduce-chexnet --display-name "Pyth
 ```
 ## Updates (2022)
 
-Changes in libraries available through conda channels and non-compability of older versions of pytorch / torchvision on newer CUDA drivers caused the original build to break.  
+Changes in libraries available through conda channels and non-compability of older versions of pytorch / torchvision with newer CUDA drivers caused the original build to break.  
 
-This library was updated in late 2022 so anyone interested could continue to use it. (1) environment.yml was updated and slight edits to code were made to ensure compatibility with newer version of pytorch/torchvision (2) NIH CXR labels were updated to latest version. Given changes in torchvision model naming conventions and updated labels, a new model was retrained; reported AUC numbers are based on this retrained models. 
+This library was updated in late 2022 so anyone interested could continue to use it. (1) environment.yml was updated and slight edits to code were made to ensure compatibility with newer version of pytorch/torchvision (2) NIH CXR labels were updated to latest version. Given changes in torchvision model naming conventions and updated labels, a new model was retrained; reported AUC numbers are based on this retrained model. 
 
-Given [expected variability in predictions of retrained deep learning models](https://arxiv.org/pdf/1912.03606.pdf), predictions vary from the model originally posted in 2018. The original model and predictions are shared in a /pretrained-old folder, but will require you to create a compatible environment with the older pytorch 0.4.0 and torchvision 0.2.0 to use them interactively.   
+Given [expected variability in predictions of retrained deep learning models](https://arxiv.org/pdf/1912.03606.pdf), predictions vary from the model originally posted in 2018. The original 2018 model and predictions are shared in a /pretrained-old folder, but will require you to create a compatible environment with the older pytorch 0.4.0 and torchvision 0.2.0 to use them interactively.   
 
 ## Replicated results:
 This reproduction achieved diagnosis-level AUC as given below compared to original paper:
