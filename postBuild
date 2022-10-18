@@ -1,4 +1,0 @@
-source activate reproduce-chexnet
-conda install pytorch=0.2.0 cuda80=1.0-0 -c soumith
-conda install torchvision=0.1.9 -c soumith
-
