@@ -125,7 +125,11 @@ This reproduction achieved diagnosis-level AUC as given below compared to origin
 
 ## NIH Dataset
 To explore the full dataset, [download images from NIH (large, ~40gb compressed)](https://nihcc.app.box.com/v/ChestXray-NIHCC),
-extract all `tar.gz` files to a single folder, and provide path as needed in code.
+extract all `tar.gz` files to a single folder, and provide path as needed in code. You can use batch download script provided by NIH researchers included in this repo:
+
+```
+python nih_batch_download_zips.py
+```
 
 ## Train your own model!
 Please note: a GPU is required to train the model. You will encounter errors if you do not have a GPU available and compatible CUDA installed and you attempt to retrain. With a GPU, you can retrain the model with `retrain.py`. Make sure you download the full NIH dataset before trying this. If you run out of GPU memory, reduce `BATCH_SIZE` from its default setting of 16.
